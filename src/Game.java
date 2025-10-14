@@ -1,4 +1,10 @@
+import java.util.Scanner;
 public class Game {
+    public Game() {
+        levelOne = new Level();
+        levelTwo = new Level();
+        levelThree = new Level();
+    }
     private Level levelOne;
     private Level levelTwo;
     private Level levelThree;
@@ -10,9 +16,15 @@ public class Game {
         bonus = true;
     }
     public Level getLevel(int i) {
-        if (i == 1) return levelOne;
-        if (i == 2) return levelTwo;
-        if (i == 3) return levelThree;
+        if (i == 1) {
+            return levelOne;
+        }
+        if (i == 2) {
+            return levelTwo;
+        }
+        if (i == 3) {
+            return levelThree;
+        }
         return null;
     }
     public int getScore() {
@@ -22,11 +34,31 @@ public class Game {
             if (levelTwo.goalReached()) {
                 points += levelTwo.getPoints();
                 if (levelThree.goalReached()) {
-                    points += levelTwo.getPoints();
+                    points += levelThree.getPoints();
                 }
             }
         }
-        if (isBonus()) points *= 3;
+        if (isBonus()) {
+            points *= 3;
+        }
         return points;
+    }
+    public void play() {
+        System.out.println("Enter the number of points.");
+        Scanner s = new Scanner(System.in);
+        levelOne.setPoints(s.nextInt());
+        levelOne.reachGoal();
+    }
+    public int playManyTimes(int num) {
+        int max = 0;
+        while (num > 0) {
+            play();
+            int score = getScore();
+            if (score > max) {
+                max = score;
+            }
+            num--;
+        }
+        return max;
     }
 }
