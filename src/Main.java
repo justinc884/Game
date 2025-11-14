@@ -1,5 +1,10 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        /*
         Game one = new Game();
         one.getLevel(1).reachGoal();
         one.getLevel(1).setPoints(200);
@@ -33,5 +38,13 @@ public class Main {
         System.out.println(four.getScore());
         Game five = new Game();
         System.out.println(five.playManyTimes(4));
+         */
+    }
+    public static int read() throws FileNotFoundException {
+        File f = new File("Scoreboard.txt");
+        Scanner s = new Scanner(f);
+        while (s.hasNextLine()) {
+
+        }
     }
 }
