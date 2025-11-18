@@ -65,7 +65,8 @@ public class Main {
     public static int read() throws FileNotFoundException {
         File f = new File("Scoreboard.txt");
         Scanner s = new Scanner(f);
-        while (s.hasNextLine()) {
+        while (s.hasNext()) {
+
         }
         return 0;
     }
