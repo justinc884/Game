@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
+        /*
         String info;
         Scoreboard game = new Scoreboard("Red", "Blue");
         info = game.getScore();
@@ -26,7 +27,6 @@ public class Main {
         System.out.println(info);
         info = game.getScore();
         System.out.println(info);
-        /*
         Game one = new Game();
         one.getLevel(1).reachGoal();
         one.getLevel(1).setPoints(200);
@@ -61,13 +61,23 @@ public class Main {
         Game five = new Game();
         System.out.println(five.playManyTimes(4));
          */
-    }
-    public static int read() throws FileNotFoundException {
         File f = new File("Scoreboard.txt");
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
-
+            String input_str = read_next(s);
+            String[] input = input_str.split(" ");
+            String team1 = input[0];
+            String team2 = input[1];
+            Scoreboard new_game = new Scoreboard (team1, team2);
+            int x = 2;
+            while (x < input.length){
+                int new_score = input[x];
+            }
         }
-        return 0;
+    }
+    public static String read_next(Scanner scanner) throws FileNotFoundException {
+        String line;
+        line = scanner.nextLine();
+        return line;
     }
 }
