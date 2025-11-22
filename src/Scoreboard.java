@@ -30,4 +30,12 @@ public class Scoreboard {
     public String getScore() {
         return score_team1 + "-" + score_team2 + "-" + active_team;
     }
+    public String getWinningTeam() {
+        if (score_team2 < score_team1) {
+            return team1;
+        } else if (score_team1 < score_team2) {
+            return team2;
+        }
+        return "";
+    }
 }

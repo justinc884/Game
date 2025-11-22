@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -63,17 +64,61 @@ public class Main {
          */
         File f = new File("Scoreboard.txt");
         Scanner s = new Scanner(f);
+        String info;
+        ArrayList<String> teams = new ArrayList<String>();
+        ArrayList<Integer> games_won = new ArrayList<Integer>();
         while (s.hasNext()) {
             String input_str = read_next(s);
             String[] input = input_str.split(" ");
             String team1 = input[0];
             String team2 = input[1];
+
+            // need to create team1 or team2
+            boolean create_team1 = true;
+            boolean create_team2 = true;
+            for (String team : teams) {
+                if (team1.equals(team)) {
+                    create_team1 = false;
+                }
+                if (team2.equals(team)) {
+                    create_team2 = false;
+                }
+            }
+
+            //create team1
+            if (create_team1) {
+                teams.add(team1);
+                games_won.add(0);
+            }
+
+            //create team2
+            if (create_team2) {
+                teams.add(team2);
+                games_won.add(0);
+            }
+
             Scoreboard new_game = new Scoreboard (team1, team2);
             int x = 2;
             while (x < input.length){
-                int new_score = input[x];
+                int new_score = Integer.parseInt(input[x]);
+                new_game.recordPlay(new_score);
+                x++;
+            }
+            info = new_game.getScore();
+            String winner = new_game.getWinningTeam();
+
+            //determine who won - add to win total
+            int idx = 0;
+            for (String team : teams) {
+                if (winner.equals(team)) {
+                    games_won.set(idx, games_won.get(idx) + 1);
+                    break;
+                }
+                idx++;
             }
         }
+        System.out.println(teams);
+        System.out.println(games_won);
     }
     public static String read_next(Scanner scanner) throws FileNotFoundException {
         String line;
